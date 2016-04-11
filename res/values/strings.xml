@@ -1,5 +1,21 @@
 <resources>
 
-    <string name="app_name">qingniao</string>
+    <string name="app_name">千鸟健身</string>
 	<string name="share">千鸟健身</string>
+	<string name="register">注册</string>
+    <string name="login">登录</string>
+    <string name="join">加入</string>
+    <string name="giveUp">放弃</string>
+    <string name="verify_code_success">验证码已经发送</string>
+	<string name="get_country_list_success">获取国家列表成功</string>
+	<string name="verify_code_error">验证码错误</string>
+	<string name="input_verify_code">请输入验证码</string>
+	<string name="phone_length_limit">手机号码长度6-16位</string>
+	<string name="send_verify_code">发送验证码中...</string>
+	<string name="input_phone_number">请输入手机号码</string>
+	<string name="please_fill_basic_info">请填写一些基本信息</string> 
+	<string name="location">定位中...</string> 
+	<string name="please_get_location">没有定位，请打开定位设置</string> 
+	<string name="choose_birthday">请选择生日</string> 
+	<string name="please_input_nickname">请输入昵称</string> 
 </resources>

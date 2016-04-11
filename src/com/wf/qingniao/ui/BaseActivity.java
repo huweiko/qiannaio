@@ -1,7 +1,6 @@
 package com.wf.qingniao.ui;
 
-import net.tsz.afinal.FinalHttp;
-
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.wf.qingniao.R;
 import com.wf.qingniao.bean.Constant.XPreference;
@@ -28,7 +27,7 @@ public class BaseActivity extends FragmentActivity implements
 	public SharedPreferences preferences;
 	protected SelfDefineActionBar actionBar;
 	protected RequestDialog requestDialog;
-	private FinalHttp mFinalHttp;
+	private HttpUtils mHttpUtils;
 	@Override
 	public SelfDefineActionBar getSelfDefActionBar() {
 		actionBar = (SelfDefineActionBar) findViewById(R.id.tkActionBar);
@@ -48,11 +47,11 @@ public class BaseActivity extends FragmentActivity implements
 	public Activity getActivity() {
 		return this;
 	}
-	protected FinalHttp getFinalHttp() {
-		if(mFinalHttp == null){
-			mFinalHttp = new FinalHttp();
+	protected HttpUtils getHttpUtils() {
+		if(mHttpUtils == null){
+			mHttpUtils = new HttpUtils();
 		}
-		return mFinalHttp;
+		return mHttpUtils;
 	}
 	/**
 	 * œ‘ æ∂‘ª∞øÚ

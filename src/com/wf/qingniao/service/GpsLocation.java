@@ -20,19 +20,18 @@ public class GpsLocation implements OnGetGeoCoderResultListener{
 	private LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private MyLocation myLocation = new MyLocation();
-	private static GpsLocation mGpsLocation;
-	private GpsLocation() {
-		
+	private Context mContext;
+	public interface LocationListener{
+		public void onReceiveLocation(MyLocation myLocation);
+	};
+	
+	LocationListener listener;
+	public GpsLocation(Context context) {
+		mContext = context;
 	}
-	public static GpsLocation getInstance(){
-		if(mGpsLocation == null){
-			mGpsLocation = new GpsLocation();
-		}
-		return mGpsLocation;
-	}
-	public void locationInit(Context context) {
+	private void locationInit() {
 		// 定位初始化
-		mLocClient = new LocationClient(context);
+		mLocClient = new LocationClient(mContext);
 		mLocClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();
 		option.setOpenGps(true);// 打开gps
@@ -42,9 +41,6 @@ public class GpsLocation implements OnGetGeoCoderResultListener{
 		// 初始化搜索模块，注册事件监听
 		mSearch = GeoCoder.newInstance();
 		mSearch.setOnGetGeoCodeResultListener(this);
-		if(!mLocClient.isStarted()){
-			mLocClient.start();
-		}
 	}
 	public class MyLocationListenner implements BDLocationListener {
 
@@ -54,18 +50,31 @@ public class GpsLocation implements OnGetGeoCoderResultListener{
 			if (location != null){
 				myLocation.setLatitude(location.getLatitude());
 				myLocation.setLongitude(location.getLongitude());
+				
 				if(myLocation.getLatitude() == 0.0 && myLocation.getLongitude() == 0.0){
-				}else{
-					LatLng ptCenter = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-					// 反Geo搜索
-					mSearch.reverseGeoCode(new ReverseGeoCodeOption()
-							.location(ptCenter));	
-				}
+					if(mLocClient.isStarted()){
+						mLocClient.stop();
+						mLocClient.unRegisterLocationListener(this);
+					}
+				} 
+				LatLng ptCenter = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+				// 反Geo搜索
+				mSearch.reverseGeoCode(new ReverseGeoCodeOption()
+						.location(ptCenter));
+				
 				Log.d("huwei", "地理位置更新，纬度 = " + location.getLatitude()+"，经度 = "+location.getLongitude());
 			}
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
+		}
+	}
+	
+	public void startLocation(LocationListener listener) {
+		this.listener = listener;
+		locationInit();
+		if(!mLocClient.isStarted()){
+			mLocClient.start();
 		}
 	}
 	@Override
@@ -77,5 +86,12 @@ public class GpsLocation implements OnGetGeoCoderResultListener{
 	public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
 		// TODO Auto-generated method stub
 		Log.d("qingniao", arg0.getAddress());
+		myLocation.setProvince(arg0.getAddressDetail().province);
+		myLocation.setCity(arg0.getAddressDetail().city);
+		myLocation.setDistrict(arg0.getAddressDetail().district);
+		if(listener != null){
+			listener.onReceiveLocation(myLocation);
+		}
 	}
+	
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.my.cloudcontact.view.SelfDefineActionBar xmlns:android="http://schemas.android.com/apk/res/android"
+<com.wf.qingniao.view.SelfDefineActionBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tkActionBar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_height"
@@ -34,4 +34,4 @@
         android:layout_centerVertical="true" >
     </FrameLayout>
 
-</com.my.cloudcontact.view.SelfDefineActionBar>
+</com.wf.qingniao.view.SelfDefineActionBar>

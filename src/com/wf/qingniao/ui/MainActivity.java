@@ -1,10 +1,8 @@
 package com.wf.qingniao.ui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -20,10 +18,11 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import cn.smssdk.gui.RegisterPage;
 import com.wf.qingniao.R;
 import com.wf.qingniao.bean.AreaCode;
+import com.wf.qingniao.bean.MyLocation;
 import com.wf.qingniao.service.GpsLocation;
+import com.wf.qingniao.service.GpsLocation.LocationListener;
 import com.wf.qingniao.utils.MyProperUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -51,17 +50,11 @@ public class MainActivity extends BaseActivity implements OnChartGestureListener
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-		GpsLocation.getInstance().locationInit(getApplicationContext());
 		InitChart();
-		SMS();
+//		SMS();
 		
 //		DbInit();
 		
-	}
-	@OnClick(R.id.ButtonShare)
-	public void share(View view) {
-		showShare();
 	}
 	//地区代码写入文件
 	void AreaWriteFile(){
@@ -136,7 +129,7 @@ public class MainActivity extends BaseActivity implements OnChartGestureListener
 		}
 		
 	}
-	void SMS(){
+/*	void SMS(){
 		//打开注册页面
 		RegisterPage registerPage = new RegisterPage();
 			registerPage.setRegisterCallback(new EventHandler() {
@@ -153,7 +146,7 @@ public class MainActivity extends BaseActivity implements OnChartGestureListener
 			}
 		});
 		registerPage.show(getActivity());
-	}
+	}*/
 	
 	private void showShare() {
 		 ShareSDK.initSDK(this);

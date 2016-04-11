@@ -32,33 +32,28 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppThemeStyle" >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="kieFibhwNoSkS4d784wzEAmGAIp9rcBq" />
         <activity android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden">
-            <intent-filter>
+            
+        </activity>
+        <activity android:name=".ui.LoginActivity">
+        	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.RegisterActivity"></activity>   
         <activity
-		     android:name="com.mob.tools.MobUIShell"
-		     android:theme="@android:style/Theme.Translucent.NoTitleBar"
-		     android:configChanges="keyboardHidden|orientation|screenSize"
-		     android:screenOrientation="portrait"
-		     android:windowSoftInputMode="stateHidden|adjustResize" >
-		
-		     <intent-filter>
-		         <data android:scheme="tencent100371282" />
-		         <action android:name="android.intent.action.VIEW" />
-		         <category android:name="android.intent.category.BROWSABLE" />
-		         <category android:name="android.intent.category.DEFAULT" />
-		     </intent-filter>
-		
-		 </activity>
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+		 
 		 <!--微信分享回调 -->
 		 <activity
 		     android:name=".wxapi.WXEntryActivity"
